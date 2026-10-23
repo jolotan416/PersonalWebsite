@@ -17,7 +17,9 @@ import androidx.compose.foundation.style.styleable
 import androidx.compose.foundation.style.then
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -78,8 +80,15 @@ fun IntroductionComponentDetails(
 ) {
     Column(
         modifier = modifier.styleable(style = style),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing),
+        horizontalAlignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
     ) {
+        val locationModifier = if (LocalCompact.current) {
+            Modifier
+        } else {
+            Modifier.fillMaxWidth()
+        }
+
         StyledText(
             modifier = Modifier.fillMaxWidth(),
             text = "Hello, I'm Jolo!",
@@ -97,7 +106,53 @@ fun IntroductionComponentDetails(
             style = AppTheme.styles.text.helperText then textStyle
         )
         Spacer(modifier = Modifier.height(AppTheme.dimensions.columnSmallVerticalSpacing))
+        IntroductionComponentLocation(
+            modifier = locationModifier,
+            textStyle = textStyle,
+            icon = Icons.Default.LocationOn,
+            text = "Germany"
+        )
+        IntroductionComponentLocation(
+            modifier = locationModifier,
+            textStyle = textStyle,
+            icon = Icons.Default.Search,
+            text = "Relocating to the Philippines and open to remote roles"
+        )
         IntroductionComponentSocialMediaButtons(modifier = Modifier.fillMaxWidth())
+    }
+}
+
+@Composable
+fun IntroductionComponentLocation(
+    modifier: Modifier = Modifier,
+    style: Style = Style,
+    textStyle: Style,
+    icon: ImageVector,
+    text: String
+) {
+    Row(
+        modifier = modifier.styleable(style = style),
+        horizontalArrangement = Arrangement.spacedBy(
+            AppTheme.dimensions.rowSmallHorizontalSpacing,
+            if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
+        ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier.size(AppTheme.dimensions.iconSize),
+            imageVector = icon,
+            contentDescription = null,
+            tint = AppTheme.colors.onSurface
+        )
+        StyledText(
+            modifier = if (LocalCompact.current) {
+                Modifier
+            } else {
+                Modifier.weight(1f)
+            },
+            text = text,
+            style = AppTheme.styles.text.sectionText then AppTheme.styles.text.bodyText then textStyle
+        )
     }
 }
 
