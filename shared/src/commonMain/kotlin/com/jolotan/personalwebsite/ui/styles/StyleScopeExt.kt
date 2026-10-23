@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalFoundationStyleApi::class)
-
 package com.jolotan.personalwebsite.ui.styles
 
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi

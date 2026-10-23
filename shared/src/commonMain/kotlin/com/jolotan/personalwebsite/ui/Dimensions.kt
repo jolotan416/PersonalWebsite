@@ -5,8 +5,10 @@ import androidx.compose.ui.unit.dp
 
 object Dimensions {
     // Container values
-    val mainContainerPadding: Dp = 24.dp
-    val internalContainerPadding: Dp = 16.dp
+    val mainContainerPadding: Dp = 32.dp
+    val internalContainerPadding: Dp = 20.dp
 
     val columnVerticalSpacing = 16.dp
+
+    val rowHorizontalSpacing = 24.dp
 }

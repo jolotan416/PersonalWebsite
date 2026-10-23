@@ -7,20 +7,25 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        optIn.add("androidx.compose.foundation.style.ExperimentalFoundationStyleApi")
+    }
+
     js {
         browser()
         binaries.executable()
     }
-    
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         binaries.executable()
     }
-    
-    
+
+
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.compose.adaptive)
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)

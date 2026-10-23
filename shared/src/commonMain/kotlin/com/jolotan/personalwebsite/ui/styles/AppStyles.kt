@@ -1,6 +1,6 @@
 package com.jolotan.personalwebsite.ui.styles
 
 object AppStyles {
-    val text
-        get() = TextStyles
+    val container = ContainerStyles
+    val text = TextStyles
 }
