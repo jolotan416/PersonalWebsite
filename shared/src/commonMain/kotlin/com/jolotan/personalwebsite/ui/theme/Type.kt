@@ -7,63 +7,64 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
 import personalwebsite.shared.generated.resources.Res
-import personalwebsite.shared.generated.resources.alata_regular
-import personalwebsite.shared.generated.resources.montserrat_black
-import personalwebsite.shared.generated.resources.montserrat_blackitalic
-import personalwebsite.shared.generated.resources.montserrat_bold
-import personalwebsite.shared.generated.resources.montserrat_bolditalic
-import personalwebsite.shared.generated.resources.montserrat_extrabold
-import personalwebsite.shared.generated.resources.montserrat_extrabolditalic
-import personalwebsite.shared.generated.resources.montserrat_extralight
-import personalwebsite.shared.generated.resources.montserrat_extralightitalic
-import personalwebsite.shared.generated.resources.montserrat_italic
-import personalwebsite.shared.generated.resources.montserrat_light
-import personalwebsite.shared.generated.resources.montserrat_lightitalic
-import personalwebsite.shared.generated.resources.montserrat_medium
-import personalwebsite.shared.generated.resources.montserrat_mediumitalic
-import personalwebsite.shared.generated.resources.montserrat_regular
-import personalwebsite.shared.generated.resources.montserrat_semibold
-import personalwebsite.shared.generated.resources.montserrat_semibolditalic
-import personalwebsite.shared.generated.resources.montserrat_thin
-import personalwebsite.shared.generated.resources.montserrat_thinitalic
+import personalwebsite.shared.generated.resources.calsans_regular
+import personalwebsite.shared.generated.resources.dmsans_black
+import personalwebsite.shared.generated.resources.dmsans_blackitalic
+import personalwebsite.shared.generated.resources.dmsans_bold
+import personalwebsite.shared.generated.resources.dmsans_bolditalic
+import personalwebsite.shared.generated.resources.dmsans_extrabold
+import personalwebsite.shared.generated.resources.dmsans_extrabolditalic
+import personalwebsite.shared.generated.resources.dmsans_extralight
+import personalwebsite.shared.generated.resources.dmsans_extralightitalic
+import personalwebsite.shared.generated.resources.dmsans_italic
+import personalwebsite.shared.generated.resources.dmsans_light
+import personalwebsite.shared.generated.resources.dmsans_lightitalic
+import personalwebsite.shared.generated.resources.dmsans_medium
+import personalwebsite.shared.generated.resources.dmsans_mediumitalic
+import personalwebsite.shared.generated.resources.dmsans_regular
+import personalwebsite.shared.generated.resources.dmsans_semibold
+import personalwebsite.shared.generated.resources.dmsans_semibolditalic
+import personalwebsite.shared.generated.resources.dmsans_thin
+import personalwebsite.shared.generated.resources.dmsans_thinitalic
+
 
 @Composable
 fun displayFontFamily() = FontFamily(
-    Font(Res.font.montserrat_black, weight = FontWeight.Black),
-    Font(Res.font.montserrat_blackitalic, weight = FontWeight.Black, style = FontStyle.Italic),
-    Font(Res.font.montserrat_bold, weight = FontWeight.Bold),
-    Font(Res.font.montserrat_bolditalic, weight = FontWeight.Bold, style = FontStyle.Italic),
-    Font(Res.font.montserrat_extrabold, weight = FontWeight.ExtraBold),
-    Font(
-        Res.font.montserrat_extrabolditalic,
-        weight = FontWeight.ExtraBold,
-        style = FontStyle.Italic
-    ),
-    Font(Res.font.montserrat_extralight, weight = FontWeight.ExtraLight),
-    Font(
-        Res.font.montserrat_extralightitalic,
-        weight = FontWeight.ExtraLight,
-        style = FontStyle.Italic
-    ),
-    Font(Res.font.montserrat_italic, weight = FontWeight.Normal, style = FontStyle.Italic),
-    Font(Res.font.montserrat_light, weight = FontWeight.Light),
-    Font(Res.font.montserrat_lightitalic, weight = FontWeight.Light, style = FontStyle.Italic),
-    Font(Res.font.montserrat_medium, weight = FontWeight.Medium),
-    Font(Res.font.montserrat_mediumitalic, weight = FontWeight.Medium, style = FontStyle.Italic),
-    Font(Res.font.montserrat_regular, weight = FontWeight.Normal),
-    Font(Res.font.montserrat_semibold, weight = FontWeight.SemiBold),
-    Font(
-        Res.font.montserrat_semibolditalic,
-        weight = FontWeight.SemiBold,
-        style = FontStyle.Italic
-    ),
-    Font(Res.font.montserrat_thin, weight = FontWeight.Thin),
-    Font(Res.font.montserrat_thinitalic, weight = FontWeight.Thin, style = FontStyle.Italic),
+    Font(Res.font.calsans_regular, FontWeight.Normal)
 )
 
 @Composable
 fun bodyFontFamily() = FontFamily(
-    Font(Res.font.alata_regular, FontWeight.Normal)
+    Font(Res.font.dmsans_black, weight = FontWeight.Black),
+    Font(Res.font.dmsans_blackitalic, weight = FontWeight.Black, style = FontStyle.Italic),
+    Font(Res.font.dmsans_bold, weight = FontWeight.Bold),
+    Font(Res.font.dmsans_bolditalic, weight = FontWeight.Bold, style = FontStyle.Italic),
+    Font(Res.font.dmsans_extrabold, weight = FontWeight.ExtraBold),
+    Font(
+        Res.font.dmsans_extrabolditalic,
+        weight = FontWeight.ExtraBold,
+        style = FontStyle.Italic
+    ),
+    Font(Res.font.dmsans_extralight, weight = FontWeight.ExtraLight),
+    Font(
+        Res.font.dmsans_extralightitalic,
+        weight = FontWeight.ExtraLight,
+        style = FontStyle.Italic
+    ),
+    Font(Res.font.dmsans_italic, weight = FontWeight.Normal, style = FontStyle.Italic),
+    Font(Res.font.dmsans_light, weight = FontWeight.Light),
+    Font(Res.font.dmsans_lightitalic, weight = FontWeight.Light, style = FontStyle.Italic),
+    Font(Res.font.dmsans_medium, weight = FontWeight.Medium),
+    Font(Res.font.dmsans_mediumitalic, weight = FontWeight.Medium, style = FontStyle.Italic),
+    Font(Res.font.dmsans_regular, weight = FontWeight.Normal),
+    Font(Res.font.dmsans_semibold, weight = FontWeight.SemiBold),
+    Font(
+        Res.font.dmsans_semibolditalic,
+        weight = FontWeight.SemiBold,
+        style = FontStyle.Italic
+    ),
+    Font(Res.font.dmsans_thin, weight = FontWeight.Thin),
+    Font(Res.font.dmsans_thinitalic, weight = FontWeight.Thin, style = FontStyle.Italic),
 )
 
 // Default Material 3 typography values

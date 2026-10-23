@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.theme.AppTheme
+import com.jolotan.personalwebsite.ui.util.LocalCompact
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import personalwebsite.shared.generated.resources.Res
@@ -37,17 +38,20 @@ import personalwebsite.shared.generated.resources.linkedin
 import personalwebsite.shared.generated.resources.site_headshot
 
 @Composable
-fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style, isCompact: Boolean) {
-    if (isCompact) {
+fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style) {
+    if (LocalCompact.current) {
         Column(
-            modifier = modifier.styleable(style = style then Style {
-                textAlign(TextAlign.Center)
-            }),
+            modifier = modifier.styleable(style = style),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
         ) {
             IntroductionComponentImage(modifier = Modifier.width(AppTheme.dimensions.compactImageWidth))
-            IntroductionComponentDetails(modifier = Modifier.fillMaxWidth(), isCompact = true)
+            IntroductionComponentDetails(
+                modifier = Modifier.fillMaxWidth(),
+                textStyle = {
+                    textAlign(TextAlign.Center)
+                },
+            )
         }
     } else {
         Row(
@@ -55,7 +59,12 @@ fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style, i
             horizontalArrangement = Arrangement.spacedBy(AppTheme.dimensions.rowHorizontalSpacing),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IntroductionComponentDetails(modifier = Modifier.weight(5f), isCompact = false)
+            IntroductionComponentDetails(
+                modifier = Modifier.weight(5f),
+                textStyle = {
+                    textAlign(TextAlign.Start)
+                },
+            )
             IntroductionComponentImage(modifier = Modifier.width(AppTheme.dimensions.imageWidth))
         }
     }
@@ -65,7 +74,7 @@ fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style, i
 fun IntroductionComponentDetails(
     modifier: Modifier = Modifier,
     style: Style = Style,
-    isCompact: Boolean
+    textStyle: Style = Style,
 ) {
     Column(
         modifier = modifier.styleable(style = style),
@@ -74,24 +83,21 @@ fun IntroductionComponentDetails(
         StyledText(
             modifier = Modifier.fillMaxWidth(),
             text = "Hello, I'm Jolo!",
-            style = AppTheme.styles.text.primaryText
+            style = AppTheme.styles.text.primaryText then textStyle
         )
         Spacer(modifier = Modifier.height(AppTheme.dimensions.columnSmallVerticalSpacing))
         StyledText(
             modifier = Modifier.fillMaxWidth(),
             text = "I turn ideas into polished apps for Android and beyond with Kotlin Multiplatform.",
-            style = AppTheme.styles.text.sectionText then AppTheme.styles.text.headlineText
+            style = AppTheme.styles.text.sectionText then AppTheme.styles.text.headlineText then textStyle
         )
         StyledText(
             modifier = Modifier.fillMaxWidth(),
             text = "(Fun fact: Even this site is written in Kotlin Multiplatform.)",
-            style = AppTheme.styles.text.helperText
+            style = AppTheme.styles.text.helperText then textStyle
         )
         Spacer(modifier = Modifier.height(AppTheme.dimensions.columnSmallVerticalSpacing))
-        IntroductionComponentSocialMediaButtons(
-            modifier = Modifier.fillMaxWidth(),
-            isCompact = isCompact
-        )
+        IntroductionComponentSocialMediaButtons(modifier = Modifier.fillMaxWidth())
     }
 }
 
@@ -99,7 +105,6 @@ fun IntroductionComponentDetails(
 fun IntroductionComponentSocialMediaButtons(
     modifier: Modifier = Modifier,
     style: Style = Style,
-    isCompact: Boolean
 ) {
     val uriHandler = LocalUriHandler.current
     val socialMediaButtons = listOf(
@@ -129,7 +134,7 @@ fun IntroductionComponentSocialMediaButtons(
         modifier = modifier.styleable(style = style),
         horizontalArrangement = Arrangement.spacedBy(
             space = AppTheme.dimensions.rowHorizontalSpacing,
-            alignment = if (isCompact) Alignment.CenterHorizontally else Alignment.Start
+            alignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
         ),
         verticalAlignment = Alignment.CenterVertically
     ) {

@@ -5,7 +5,7 @@ import androidx.compose.ui.text.style.TextAlign
 
 object TextStyles {
     val primaryText = Style {
-        textStyle(typography.displayLargeEmphasized)
+        textStyle(typography.displayLarge)
         contentColor(colors.primary)
     }
 
@@ -13,15 +13,20 @@ object TextStyles {
         textStyle(typography.headlineMedium)
     }
 
+    val bodyText = Style {
+        textStyle(typography.bodyLarge)
+        contentColor(colors.onBackground)
+    }
+
     val helperText = Style {
-        textStyle(typography.bodyMediumEmphasized)
+        textStyle(typography.bodyMedium)
     }
 
     val sectionText = Style {
         contentColor(colors.onSurface)
     }
 
-    // Buton text styles
+    // Buton buttonText styles
     val buttonText = Style {
         textStyle(typography.labelLarge)
         textAlign(TextAlign.Center)
@@ -29,5 +34,20 @@ object TextStyles {
 
     val largeButtonText = Style {
         textStyle(typography.headlineSmall)
+    }
+
+    // Section buttonText styles
+    val detailsTitleText = Style {
+        textStyle(typography.headlineLarge)
+        contentColor(colors.secondary)
+    }
+
+    val sectionHeaderText = Style {
+        textStyle(typography.titleLarge)
+        contentColor(colors.primary)
+    }
+
+    val subSectionText = Style {
+        textStyle(typography.titleMedium)
     }
 }

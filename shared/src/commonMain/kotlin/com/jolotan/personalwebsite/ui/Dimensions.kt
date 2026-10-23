@@ -13,7 +13,7 @@ object Dimensions {
 
     val rowHorizontalSpacing = 24.dp
 
-    val maxSectionWidth = 1000.dp
+    val maxSectionWidth = 1200.dp
 
     // Image values
     val imageWidth = 320.dp
