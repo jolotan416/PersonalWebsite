@@ -11,17 +11,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.foundation.style.styleable
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +33,6 @@ import com.jolotan.personalwebsite.ui.molecules.SectionTextStyle
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.DetailsType
 import com.jolotan.personalwebsite.ui.util.LocalCompact
-import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
 private val VISIBILITY_ANIMATION_DURATION = 50.milliseconds
@@ -131,7 +127,7 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
 
                 item(key = "details") {
                     AnimatedContent(
-                        modifier = widthModifier.animateItem(),
+                        modifier = widthModifier,
                         targetState = selectedDetailsType,
                         transitionSpec = {
                             fadeIn() togetherWith fadeOut() using SizeTransform(clip = false)

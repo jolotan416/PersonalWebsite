@@ -12,12 +12,13 @@ object Dimensions {
     val columnSmallVerticalSpacing = 12.dp
 
     val rowHorizontalSpacing = 24.dp
+    val rowSmallHorizontalSpacing = 12.dp
 
     val maxSectionWidth = 1200.dp
 
     // Image values
     val imageWidth = 320.dp
-    val compactImageWidth = 200.dp
+    val compactImageWidth = 120.dp
     val iconSize = 28.dp
 
     // Button values

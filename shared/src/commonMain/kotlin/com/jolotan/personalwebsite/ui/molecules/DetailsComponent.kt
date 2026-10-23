@@ -1,21 +1,35 @@
 package com.jolotan.personalwebsite.ui.molecules
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.styleable
 import androidx.compose.foundation.style.then
+import androidx.compose.material3.FilterChip
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.DetailsType
 import com.jolotan.personalwebsite.ui.util.LocalCompact
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
+import personalwebsite.shared.generated.resources.Res
+import personalwebsite.shared.generated.resources.github
+import personalwebsite.shared.generated.resources.spotlight
+import personalwebsite.shared.generated.resources.wais
 
 @Composable
 fun DetailsComponent(
@@ -316,7 +330,162 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
 
 @Composable
 fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
+    Column(
+        modifier = modifier.styleable(style = style),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
+    ) {
+        val uriHandler = LocalUriHandler.current
 
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth()
+                .clickable(onClick = {
+                    uriHandler.openUri("https://github.com/jolotan416/budget-tracker-app")
+                }),
+            title = "Wais: Budget Tracker App",
+            description = "Wais is a Kotlin Multiplatform application that aims to simplify financial organization, especially (but not limited) for Filipinos.",
+            image = Res.drawable.wais,
+            tags = listOf(
+                "Kotlin Multiplatform",
+                "Compose",
+                "Styles API",
+                "Koin",
+                "Ktor",
+                "Room",
+                "DataStore",
+                "Firebase Hosting and Analytics",
+                "AI-assisted"
+            )
+        )
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth()
+                .clickable(onClick = {
+                    uriHandler.openUri("https://github.com/jolotan416/PersonalWebsite")
+                }),
+            title = "KMP Personal Website",
+            description = "This site you're browsing: made using Kotlin Multiplatform and deployed using Firebase Hosting.",
+            image = Res.drawable.github,
+            tags = listOf(
+                "Kotlin Multiplatform",
+                "Compose",
+                "Styles API",
+                "Firebase Hosting",
+            )
+        )
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth()
+                .clickable(onClick = {
+                    uriHandler.openUri("https://github.com/jolotan416/UnraidAppProject")
+                }),
+            title = "Unraid App Project",
+            description = "Personal app project to access Unraid NAS from phone using APIs.",
+            image = Res.drawable.github,
+            tags = listOf(
+                "Kotlin Multiplatform",
+                "Compose",
+                "Styles API",
+                "Firebase Hosting",
+            )
+        )
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth()
+                .clickable(onClick = {
+                    uriHandler.openUri("https://github.com/jolotan416/spotlight-app")
+                }),
+            title = "Spotlight: To-do List App",
+            description = "Personal app project to access Unraid NAS from phone using APIs.",
+            image = Res.drawable.spotlight,
+            tags = listOf(
+                "Kotlin Multiplatform",
+                "Compose",
+                "Styles API",
+                "Firebase Hosting",
+            )
+        )
+    }
+}
+
+@Composable
+fun ProjectsDetailsSection(
+    modifier: Modifier = Modifier,
+    style: Style = Style,
+    title: String,
+    description: String,
+    image: DrawableResource?,
+    tags: List<String>
+) {
+    DetailsSection(
+        modifier = modifier.styleable(style = style),
+        title = title
+    ) {
+        if (LocalCompact.current) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                image?.let {
+                    Image(
+                        modifier = Modifier.size(AppTheme.dimensions.compactImageWidth),
+                        painter = painterResource(it),
+                        contentDescription = null
+                    )
+                }
+                ProjectDetails(description = description, tags = tags)
+            }
+        } else {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.dimensions.rowHorizontalSpacing),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                image?.let {
+                    Image(
+                        modifier = Modifier.size(AppTheme.dimensions.compactImageWidth),
+                        painter = painterResource(it),
+                        contentDescription = null
+                    )
+                }
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
+                ) {
+                    ProjectDetails(description = description, tags = tags)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ProjectDetails(description: String, tags: List<String>) {
+    StyledText(
+        modifier = Modifier.fillMaxWidth(),
+        style = SectionTextStyle(),
+        text = description
+    )
+
+    FlowRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(
+            AppTheme.dimensions.rowSmallHorizontalSpacing, if (LocalCompact.current) {
+                Alignment.CenterHorizontally
+            } else {
+                Alignment.Start
+            }
+        )
+    ) {
+        tags.forEach { tag ->
+            FilterChip(
+                selected = false,
+                onClick = {},
+                label = {
+                    StyledText(style = AppTheme.styles.text.helperText, text = tag)
+                })
+        }
+    }
 }
 
 @Composable
