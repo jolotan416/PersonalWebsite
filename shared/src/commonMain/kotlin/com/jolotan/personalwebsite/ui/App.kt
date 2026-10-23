@@ -1,19 +1,27 @@
 package com.jolotan.personalwebsite.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.foundation.style.styleable
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +36,10 @@ import com.jolotan.personalwebsite.ui.molecules.SectionTextStyle
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.DetailsType
 import com.jolotan.personalwebsite.ui.util.LocalCompact
+import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
+
+private val VISIBILITY_ANIMATION_DURATION = 50.milliseconds
 
 @OptIn(ExperimentalFoundationStyleApi::class)
 @Composable
@@ -42,8 +53,8 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
             } else {
                 Modifier.widthIn(max = AppTheme.dimensions.maxSectionWidth)
             }
+
         var isAnimatedVisibilityFinished by remember { mutableStateOf(false) }
-        var isDetailsVisible by remember { mutableStateOf(false) }
         var selectedDetailsType by remember { mutableStateOf(DetailsType.entries.first()) }
 
         CompositionLocalProvider(LocalCompact provides isCompact) {
@@ -57,11 +68,11 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                 horizontalAlignment = Alignment.CenterHorizontally,
                 contentPadding = PaddingValues(AppTheme.dimensions.mainContainerPadding)
             ) {
-                item(key = Unit) {
+                item(key = "introduction") {
                     TimedAnimatedVisibility(
                         modifier = widthModifier,
                         key = Unit,
-                        duration = 100.milliseconds,
+                        duration = VISIBILITY_ANIMATION_DURATION,
                         isVisible = isAnimatedVisibilityFinished,
                         updateVisibility = { isAnimatedVisibilityFinished = it }
                     ) {
@@ -72,11 +83,11 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                     }
                 }
 
-                item {
+                item(key = "bio") {
                     TimedAnimatedVisibility(
                         modifier = widthModifier,
                         key = Unit,
-                        duration = 100.milliseconds,
+                        duration = VISIBILITY_ANIMATION_DURATION,
                         isVisible = isAnimatedVisibilityFinished,
                         updateVisibility = { isAnimatedVisibilityFinished = it }
                     ) {
@@ -98,11 +109,11 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                     }
                 }
 
-                stickyHeader(key = selectedDetailsType.buttonText) {
+                stickyHeader(key = DetailsType.entries) {
                     TimedAnimatedVisibility(
                         modifier = widthModifier,
                         key = Unit,
-                        duration = 100.milliseconds,
+                        duration = VISIBILITY_ANIMATION_DURATION,
                         isVisible = isAnimatedVisibilityFinished,
                         updateVisibility = { isAnimatedVisibilityFinished = it }
                     ) {
@@ -110,24 +121,25 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                             modifier = widthModifier,
                             selectedDetailsType = selectedDetailsType,
                             selectLabel = {
-                                isDetailsVisible = false
-                                selectedDetailsType = it
+                                if (selectedDetailsType != it) {
+                                    selectedDetailsType = it
+                                }
                             }
                         )
                     }
                 }
 
-                item(key = selectedDetailsType) {
-                    TimedAnimatedVisibility(
-                        modifier = widthModifier,
-                        key = selectedDetailsType,
-                        duration = 50.milliseconds,
-                        isVisible = isDetailsVisible,
-                        updateVisibility = { isDetailsVisible = it }
-                    ) {
+                item(key = "details") {
+                    AnimatedContent(
+                        modifier = widthModifier.animateItem(),
+                        targetState = selectedDetailsType,
+                        transitionSpec = {
+                            fadeIn() togetherWith fadeOut() using SizeTransform(clip = false)
+                        }
+                    ) { detailsType ->
                         DetailsComponent(
                             modifier = Modifier.fillMaxWidth(),
-                            detailsType = selectedDetailsType
+                            detailsType = detailsType
                         )
                     }
                 }
