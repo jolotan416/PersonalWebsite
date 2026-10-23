@@ -14,21 +14,35 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.styleable
 import androidx.compose.foundation.style.then
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Architecture
+import androidx.compose.material.icons.filled.Construction
+import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.Handshake
+import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import com.jolotan.personalwebsite.ui.atoms.StyledText
+import com.jolotan.personalwebsite.ui.molecules.SectionIcon.Drawable
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.DetailsType
 import com.jolotan.personalwebsite.ui.util.LocalCompact
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import personalwebsite.shared.generated.resources.Res
+import personalwebsite.shared.generated.resources.beautymnl
+import personalwebsite.shared.generated.resources.favicon
 import personalwebsite.shared.generated.resources.github
+import personalwebsite.shared.generated.resources.nokia
+import personalwebsite.shared.generated.resources.paradoxcat
 import personalwebsite.shared.generated.resources.spotlight
+import personalwebsite.shared.generated.resources.up_diliman
 import personalwebsite.shared.generated.resources.wais
 
 @Composable
@@ -70,7 +84,11 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
         modifier = modifier.styleable(style = style),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
     ) {
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Architecture that scales") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Architecture that scales",
+            sectionIcon = SectionIcon.Vector(Icons.Default.Architecture)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
@@ -79,7 +97,11 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
                 """.trimIndent()
             )
         }
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Quality you can measure") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Quality you can measure",
+            sectionIcon = SectionIcon.Vector(Icons.Default.VerifiedUser)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
@@ -88,7 +110,11 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
                 """.trimIndent()
             )
         }
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Users front and center") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Users front and center",
+            sectionIcon = SectionIcon.Vector(Icons.Default.Groups)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
@@ -97,7 +123,11 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
                 """.trimIndent()
             )
         }
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Technical leadership") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Technical leadership",
+            sectionIcon = SectionIcon.Vector(Icons.Default.Handshake)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
@@ -106,7 +136,11 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
                 """.trimIndent()
             )
         }
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Skills and Tools") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Skills and Tools",
+            sectionIcon = SectionIcon.Vector(Icons.Default.Construction)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SubSectionTitleStyle(),
@@ -206,7 +240,11 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
         modifier = modifier.styleable(style = style),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
     ) {
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Paradox Cat GmbH · Germany") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Paradox Cat GmbH · Germany",
+            sectionIcon = Drawable(Res.drawable.paradoxcat)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SubSectionTitleStyle(),
@@ -241,7 +279,11 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 """.trimIndent()
             )
         }
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "BeautyMnl · Philippines") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "BeautyMnl · Philippines",
+            sectionIcon = Drawable(Res.drawable.beautymnl)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SubSectionTitleStyle(),
@@ -261,7 +303,8 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
         }
         DetailsSection(
             modifier = Modifier.fillMaxWidth(),
-            title = "Nokia Technology Center · Philippines"
+            title = "Nokia Technology Center · Philippines",
+            sectionIcon = Drawable(Res.drawable.nokia)
         ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
@@ -308,7 +351,11 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 """.trimIndent()
             )
         }
-        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "Education") {
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Education",
+            sectionIcon = Drawable(Res.drawable.up_diliman)
+        ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SubSectionTitleStyle(),
@@ -364,7 +411,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 }),
             title = "KMP Personal Website",
             description = "This site you're browsing: made using Kotlin Multiplatform and deployed using Firebase Hosting.",
-            image = Res.drawable.github,
+            image = Res.drawable.favicon,
             tags = listOf(
                 "Kotlin Multiplatform",
                 "Compose",
@@ -493,19 +540,71 @@ fun DetailsSection(
     modifier: Modifier = Modifier,
     style: Style = Style,
     title: String,
+    sectionIcon: SectionIcon? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier.styleable(style = style then AppTheme.styles.container.section),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing),
+        horizontalAlignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
     ) {
-        StyledText(
-            modifier = Modifier.fillMaxWidth(),
-            text = title,
-            style = AppTheme.styles.text.sectionHeaderText then TextAlignmentStyle()
-        )
+        if (LocalCompact.current) {
+            DetailsSectionIcon(
+                modifier = Modifier.size(AppTheme.dimensions.largeIconSize),
+                sectionIcon = sectionIcon
+            )
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                text = title,
+                style = AppTheme.styles.text.sectionHeaderText then TextAlignmentStyle()
+            )
+        } else {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.dimensions.rowHorizontalSpacing),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                DetailsSectionIcon(
+                    modifier = Modifier.size(AppTheme.dimensions.largeIconSize),
+                    sectionIcon = sectionIcon
+                )
+                StyledText(
+                    modifier = Modifier.weight(1f),
+                    text = title,
+                    style = AppTheme.styles.text.sectionHeaderText then TextAlignmentStyle()
+                )
+            }
+        }
 
         content()
+    }
+}
+
+@Composable
+fun DetailsSectionIcon(
+    modifier: Modifier = Modifier,
+    style: Style = Style,
+    sectionIcon: SectionIcon?
+) {
+    when (sectionIcon) {
+        is SectionIcon.Vector -> {
+            Icon(
+                modifier = modifier.styleable(style = style),
+                imageVector = sectionIcon.imageVector,
+                contentDescription = null,
+                tint = AppTheme.colors.onSurface
+            )
+        }
+
+        is Drawable -> {
+            Image(
+                modifier = modifier.styleable(style = style),
+                painter = painterResource(sectionIcon.drawableResource),
+                contentDescription = null
+            )
+        }
+
+        else -> {}
     }
 }
 
@@ -521,4 +620,9 @@ fun TextAlignmentStyle() = if (LocalCompact.current) {
     Style { textAlign(TextAlign.Center) }
 } else {
     Style { textAlign(TextAlign.Start) }
+}
+
+sealed interface SectionIcon {
+    data class Vector(val imageVector: ImageVector) : SectionIcon
+    data class Drawable(val drawableResource: DrawableResource) : SectionIcon
 }
