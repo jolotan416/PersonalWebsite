@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorProducer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import com.jolotan.personalwebsite.ui.styles.rememberThemedStyle
 
 @Composable
 fun StyledText(
@@ -27,7 +28,7 @@ fun StyledText(
     key(text) {
         BasicText(
             text = text,
-            modifier = modifier.styleable(styleState = styleState, style = style),
+            modifier = modifier.styleable(styleState = styleState, style = rememberThemedStyle(style)),
             style = textStyle,
             color = color,
             overflow = overflow,

@@ -26,7 +26,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import org.jetbrains.compose.resources.DrawableResource
@@ -47,7 +46,7 @@ fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style, i
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
         ) {
-            IntroductionComponentImage(modifier = Modifier.width(200.dp))
+            IntroductionComponentImage(modifier = Modifier.width(AppTheme.dimensions.compactImageWidth))
             IntroductionComponentDetails(modifier = Modifier.fillMaxWidth(), isCompact = true)
         }
     } else {
@@ -57,7 +56,7 @@ fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style, i
             verticalAlignment = Alignment.CenterVertically
         ) {
             IntroductionComponentDetails(modifier = Modifier.weight(5f), isCompact = false)
-            IntroductionComponentImage(modifier = Modifier.height(320.dp))
+            IntroductionComponentImage(modifier = Modifier.width(AppTheme.dimensions.imageWidth))
         }
     }
 }
@@ -135,7 +134,7 @@ fun IntroductionComponentSocialMediaButtons(
         verticalAlignment = Alignment.CenterVertically
     ) {
         socialMediaButtons.forEach { (icon, url) ->
-            val iconModifier = Modifier.size(28.dp)
+            val iconModifier = Modifier.size(AppTheme.dimensions.iconSize)
                 .clickable(onClick = { uriHandler.openUri(url) })
             val iconTint = AppTheme.colors.onSurface
 

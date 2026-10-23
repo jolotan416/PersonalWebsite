@@ -1,10 +1,12 @@
 package com.jolotan.personalwebsite.ui.styles
 
-import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
+import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.StyleScope
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import com.jolotan.personalwebsite.ui.Dimensions
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.theme.AppTheme.Companion.LocalAppTheme
@@ -20,3 +22,9 @@ val StyleScope.shapes: Shapes
 
 val StyleScope.dimensions: Dimensions
     get() = AppTheme.dimensions
+
+@Composable
+fun rememberThemedStyle(style: Style): Style {
+    val theme = LocalAppTheme.current
+    return remember(style, theme) { Style { with(style) { applyStyle() } } }
+}
