@@ -256,9 +256,9 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
                 text = """
-                    I serve as a technical expert for BMW Android Automotive OS telematics use cases. I help shape requirements and planning across multiple ECUs while also implementing and maintaining the features myself.
+                    I serve as a technical expert for BMW’s Android Automotive OS telematics use cases, helping with requirements creation and planning across multiple ECUs while also implementing, maintaining, and reviewing features across the codebase.
                     
-                    My architectural changes moved multiple applications to a Unidirectional Data Flow architecture and introduced multi-user communication via AIDL. This improved performance, shortened development time, and cut down on crashes and critical issues. I also led a testing push that brought code coverage above 80% across 10 applications. Through code reviews and documentation, I help the team keep that quality bar high.
+                    I introduced architectural changes to multiple applications by shifting them towards a Unidirectional Data Flow architecture and adding multi-user communication through AIDL, which improved performance, shortened development time, and reduced crashes and critical issues. I also enhanced our code quality by initiating local unit tests and instrumented tests that brought code coverage above 80% across 10 applications.
                 """.trimIndent()
             )
             Spacer(modifier = Modifier.height(AppTheme.dimensions.columnVerticalSpacing))
@@ -273,9 +273,9 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
                 text = """
-                    I implemented and maintained telematics features across 10 BMW Android Automotive OS applications. These covered MQTT and REST backend communication, call handling, car signal processing, and video playback.
+                    I implemented and maintained telematics features across 10 BMW Android Automotive OS applications, covering backend communication over MQTT and REST APIs, call handling, car signal processing, and video playback.
                     
-                    I also led the work to support multiple ECUs. That meant building new Jetpack Compose screens, maintaining several backend communication frameworks, and adding multiple product flavors to the Zuul CI/CD pipeline. This work made it possible to release our apps in new BMW car generations. Along the way, I built several applications from scratch to meet new telematics
+                    To support the release of new BMW car generations, I introduced multi-ECU support to existing applications, which involved building new Jetpack Compose screens, maintaining multiple backend communication frameworks and data structures, and supporting multiple product flavors in our CI/CD pipeline. I also built multiple applications from scratch to meet new telematics requirements.
                 """.trimIndent()
             )
         }
@@ -295,9 +295,9 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
                 text = """
-                    I led feature development for BeautyMnl’s e-commerce app, working closely with design, business, and other departments to take features from idea to launch.
+                    I led feature development for BeautyMnl’s e-commerce mobile app, working closely with different departments to take features from idea to launch.
                     
-                    My biggest project was rebuilding the app from the ground up. The rebuild supported the company’s rebranding and introduced MVVM architecture with Kotlin Coroutines and Retrofit, which made the codebase much easier to maintain. I launched features that increased conversions, improved the shopping experience, and added new payment methods. I also set up a Bitrise CI/CD pipeline that replaced a 20–30 minute manual deployment process, and I started the team’s unit testing practice.
+                    My biggest contribution was rebuilding the app from the ground up to support the company’s rebranding. Along the way, I introduced architectural improvements using MVVM with Kotlin Coroutines and Retrofit, which made the codebase much easier to maintain. I launched several features that increased user conversions, improved the user experience, and added new payment methods. I also set up a Bitrise CI/CD pipeline that replaced a 20–30-minute manual deployment process, and initiated the team’s unit testing practice.                   
                 """.trimIndent()
             )
         }
@@ -311,35 +311,7 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 style = SubSectionTitleStyle(),
                 text = """
                     Team Technical Lead & Code Guard | February 2019 – June 2019
-                """.trimIndent()
-            )
-            StyledText(
-                modifier = Modifier.fillMaxWidth(),
-                style = SectionTextStyle(),
-                text = """
-                    I was the go-to person for technical specifications on 5G network component simulators, and the primary code reviewer for the team. I led the introduction of data traffic features into a 5G simulator, which made system demos of Nokia’s flagship product possible.
-                """.trimIndent()
-            )
-            Spacer(modifier = Modifier.height(AppTheme.dimensions.columnVerticalSpacing))
-            StyledText(
-                modifier = Modifier.fillMaxWidth(),
-                style = SubSectionTitleStyle(),
-                text = """
                     Deputy Code Guard | October 2018 – February 2019
-                """.trimIndent()
-            )
-            StyledText(
-                modifier = Modifier.fillMaxWidth(),
-                style = SectionTextStyle(),
-                text = """
-                    I reviewed code for optimization and readability in a newly formed scrum team and identified opportunities for architectural improvement.
-                """.trimIndent()
-            )
-            Spacer(modifier = Modifier.height(AppTheme.dimensions.columnVerticalSpacing))
-            StyledText(
-                modifier = Modifier.fillMaxWidth(),
-                style = SubSectionTitleStyle(),
-                text = """
                     Scrum Feature Owner & R&D Engineer | June 2017 - October 2018
                 """.trimIndent()
             )
@@ -347,7 +319,9 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
                 text = """
-                    I developed 5G network simulator features in C++ and wrote technical specifications covering virtualization, networking, platform compatibility, and component integration. I also coordinated across teams. My work leading the initial virtualization of multiple network simulators set the foundation for future development configurations.
+                    During my stay, I progressed from R&D Engineer to Team Technical Lead in under two years, serving as the team’s point person for technical specifications and its primary code reviewer for correctness, optimization, and readability.
+                    
+                    I led the introduction of data traffic features in a 5G network component simulator, which made it possible to run system demos of Nokia’s main product. I also laid the groundwork for future development setups by leading the initial virtualization of multiple network component simulators. 
                 """.trimIndent()
             )
         }
@@ -368,7 +342,7 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle(),
                 text = """
-                    During university I competed in several hackathons as a front-end designer, programmer, and presenter. I won first place at Hackzilla and Hack UP, and placed third at Accenture: Program the Future. I also served as Marketing Head of the Association for Computing Machinery, UP Diliman Student Chapter.
+                    As a university student, I competed in and won several hackathons as a front-end designer, programmer, and presenter. I also served as Marketing Head of the Association for Computing Machinery, UP Diliman Student Chapter.
                 """.trimIndent()
             )
         }
@@ -389,15 +363,24 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                     uriHandler.openUri("https://github.com/jolotan416/budget-tracker-app")
                 }),
             title = "Wais: Budget Tracker App",
-            description = "Wais is a Kotlin Multiplatform application that aims to simplify financial organization, especially (but not limited) for Filipinos.",
+            description = """
+                Wais is a Kotlin Multiplatform application that aims to simplify financial organization, especially for (but not limited to) Filipinos. It supports multiple profiles, automatic exchange rates, savings goals, budget allocations, and cash flow tracking, all packaged in one easy-to-use app.
+                
+                It uses an offline-first approach, using Room and DataStore to persist user data and exchange rates fetched through Ktor. It also supports deployment to both the Google Play Store and the Apple App Store, with Firebase integrations for analytics events and crash tracking.
+                """.trimIndent(),
             image = Res.drawable.wais,
             tags = listOf(
+                "Android",
+                "iOS",
                 "Kotlin Multiplatform",
                 "Compose",
+                "Unidirectional Data Flow Architecture",
+                "MVVM",
                 "Styles API",
                 "Koin",
                 "Ktor",
-                "Room",
+                "Room Database",
+                "Coroutines and Flows",
                 "DataStore",
                 "Firebase Hosting and Analytics",
                 "AI-assisted"
@@ -409,8 +392,8 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 .clickable(onClick = {
                     uriHandler.openUri("https://github.com/jolotan416/PersonalWebsite")
                 }),
-            title = "KMP Personal Website",
-            description = "This site you're browsing: made using Kotlin Multiplatform and deployed using Firebase Hosting.",
+            title = "Personal Website",
+            description = "This site that you're currently browsing, built with Kotlin Multiplatform and deployed on Firebase Hosting.",
             image = Res.drawable.favicon,
             tags = listOf(
                 "Kotlin Multiplatform",
@@ -426,13 +409,18 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                     uriHandler.openUri("https://github.com/jolotan416/UnraidAppProject")
                 }),
             title = "Unraid App Project",
-            description = "Personal app project to access Unraid NAS from phone using APIs.",
+            description = """This is my first Kotlin Multiplatform project that connects to Unraid NAS servers through its GraphQL API.""",
             image = Res.drawable.github,
             tags = listOf(
                 "Kotlin Multiplatform",
                 "Compose",
-                "Styles API",
-                "Firebase Hosting",
+                "Unidirectional Data Flow Architecture",
+                "MVVM",
+                "Koin",
+                "Ktor",
+                "Room Database",
+                "Coroutines and Flows",
+                "Coil",
             )
         )
 
@@ -442,13 +430,18 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                     uriHandler.openUri("https://github.com/jolotan416/spotlight-app")
                 }),
             title = "Spotlight: To-do List App",
-            description = "Personal app project to access Unraid NAS from phone using APIs.",
+            description = """This is my first Android project that was made from scratch, designed to help users focus on one task at a time.""",
             image = Res.drawable.spotlight,
             tags = listOf(
-                "Kotlin Multiplatform",
+                "Android",
                 "Compose",
-                "Styles API",
-                "Firebase Hosting",
+                "Fragments",
+                "MVVM with LiveData",
+                "Unidirectional Data Flow Architecture",
+                "Room Database",
+                "Coroutines and Flows",
+                "Hilt",
+                "WorkManager"
             )
         )
     }
