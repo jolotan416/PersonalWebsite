@@ -360,7 +360,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
         ProjectsDetailsSection(
             modifier = Modifier.fillMaxWidth()
                 .clickable(onClick = {
-                    uriHandler.openUri("https://github.com/jolotan416/budget-tracker-app")
+                    uriHandler.openUri("https://github.com/jolotan416/WaisPublic")
                 }),
             title = "Wais: Budget Tracker App",
             description = """
