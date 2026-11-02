@@ -5,10 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -45,7 +43,11 @@ fun IntroductionComponent(modifier: Modifier = Modifier, style: Style = Style) {
         Column(
             modifier = modifier.styleable(style = style),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing)
+            verticalArrangement = Arrangement.spacedBy(
+                AppTheme.dimensions.getColumnVerticalSpacing(
+                    LocalCompact.current
+                )
+            )
         ) {
             IntroductionComponentImage(modifier = Modifier.width(AppTheme.dimensions.compactImageWidth))
             IntroductionComponentDetails(
@@ -80,7 +82,11 @@ fun IntroductionComponentDetails(
 ) {
     Column(
         modifier = modifier.styleable(style = style),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSpacing),
+        verticalArrangement = Arrangement.spacedBy(
+            AppTheme.dimensions.getColumnVerticalSpacing(
+                LocalCompact.current
+            )
+        ),
         horizontalAlignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
     ) {
         val locationModifier = if (LocalCompact.current) {
@@ -94,30 +100,38 @@ fun IntroductionComponentDetails(
             text = "Hello, I'm Jolo!",
             style = AppTheme.styles.text.primaryText then textStyle
         )
-        Spacer(modifier = Modifier.height(AppTheme.dimensions.columnSmallVerticalSpacing))
-        StyledText(
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            text = "I turn ideas into polished apps for Android and beyond with Kotlin Multiplatform.",
-            style = AppTheme.styles.text.sectionText then AppTheme.styles.text.headlineText then textStyle
-        )
-        StyledText(
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSmallSpacing)
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                text = "I turn ideas into polished apps for Android and beyond with Kotlin Multiplatform.",
+                style = AppTheme.styles.text.sectionText then AppTheme.styles.text.headlineText then textStyle
+            )
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                text = "(Fun fact: Even this site is written in Kotlin Multiplatform.)",
+                style = AppTheme.styles.text.helperText then textStyle
+            )
+        }
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            text = "(Fun fact: Even this site is written in Kotlin Multiplatform.)",
-            style = AppTheme.styles.text.helperText then textStyle
-        )
-        Spacer(modifier = Modifier.height(AppTheme.dimensions.columnSmallVerticalSpacing))
-        IntroductionComponentLocation(
-            modifier = locationModifier,
-            textStyle = textStyle,
-            icon = Icons.Default.LocationOn,
-            text = "Germany"
-        )
-        IntroductionComponentLocation(
-            modifier = locationModifier,
-            textStyle = textStyle,
-            icon = Icons.Default.Search,
-            text = "Relocating to the Philippines and open to remote roles"
-        )
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSmallSpacing)
+        ) {
+            IntroductionComponentLocation(
+                modifier = locationModifier,
+                textStyle = textStyle,
+                icon = Icons.Default.LocationOn,
+                text = "Germany"
+            )
+            IntroductionComponentLocation(
+                modifier = locationModifier,
+                textStyle = textStyle,
+                icon = Icons.Default.Search,
+                text = "Relocating to the Philippines and open to remote roles"
+            )
+        }
         IntroductionComponentSocialMediaButtons(modifier = Modifier.fillMaxWidth())
     }
 }

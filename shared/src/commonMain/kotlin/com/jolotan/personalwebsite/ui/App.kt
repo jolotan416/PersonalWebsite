@@ -2,6 +2,7 @@ package com.jolotan.personalwebsite.ui
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
@@ -11,11 +12,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.foundation.style.styleable
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +44,7 @@ private val VISIBILITY_ANIMATION_DURATION = 50.milliseconds
 @Composable
 fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass) {
     AppTheme {
+        val scrollState = rememberLazyListState()
         val isCompact =
             !windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_LARGE_LOWER_BOUND)
         val widthModifier =
@@ -51,14 +55,15 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
             }
 
         var isAnimatedVisibilityFinished by remember { mutableStateOf(false) }
-        var selectedDetailsType by remember { mutableStateOf(DetailsType.entries.first()) }
+        var selectedDetailsType: DetailsType? by remember { mutableStateOf(null) }
 
         CompositionLocalProvider(LocalCompact provides isCompact) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
                     .styleable(style = AppTheme.styles.container.main),
+                state = scrollState,
                 verticalArrangement = Arrangement.spacedBy(
-                    space = AppTheme.dimensions.columnVerticalSpacing,
+                    space = AppTheme.dimensions.getColumnVerticalSpacing(isCompact),
                     alignment = Alignment.CenterVertically
                 ),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -74,7 +79,7 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                     ) {
                         IntroductionComponent(
                             modifier = Modifier.fillMaxWidth(),
-                            style = AppTheme.styles.container.section,
+                            style = AppTheme.styles.container.getStyleSection(isCompact)
                         )
                     }
                 }
@@ -117,8 +122,10 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                             modifier = widthModifier,
                             selectedDetailsType = selectedDetailsType,
                             selectLabel = {
-                                if (selectedDetailsType != it) {
-                                    selectedDetailsType = it
+                                selectedDetailsType = if (selectedDetailsType != it) {
+                                    it
+                                } else {
+                                    null
                                 }
                             }
                         )
@@ -130,13 +137,21 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                         modifier = widthModifier,
                         targetState = selectedDetailsType,
                         transitionSpec = {
-                            fadeIn() togetherWith fadeOut() using SizeTransform(clip = false)
+                            fadeIn(tween(durationMillis = VISIBILITY_ANIMATION_DURATION.inWholeMilliseconds.toInt())) togetherWith
+                                    fadeOut(tween(durationMillis = VISIBILITY_ANIMATION_DURATION.inWholeMilliseconds.toInt())) using
+                                    SizeTransform(clip = false)
                         }
                     ) { detailsType ->
                         DetailsComponent(
                             modifier = Modifier.fillMaxWidth(),
                             detailsType = detailsType
                         )
+
+                        LaunchedEffect(transition.currentState, transition.targetState) {
+                            if (transition.currentState == transition.targetState && !transition.isRunning && detailsType != null) {
+                                scrollState.animateScrollToItem(2)
+                            }
+                        }
                     }
                 }
             }

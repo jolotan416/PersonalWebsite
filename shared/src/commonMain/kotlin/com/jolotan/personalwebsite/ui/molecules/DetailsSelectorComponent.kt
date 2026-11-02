@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jolotan.personalwebsite.ui.atoms.CustomButton
 import com.jolotan.personalwebsite.ui.styles.colors
-import com.jolotan.personalwebsite.ui.styles.dimensions
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.DetailsType
 import com.jolotan.personalwebsite.ui.util.LocalCompact
@@ -20,13 +19,14 @@ import com.jolotan.personalwebsite.ui.util.LocalCompact
 fun DetailsSelectorComponent(
     modifier: Modifier = Modifier,
     style: Style = Style,
-    selectedDetailsType: DetailsType,
+    selectedDetailsType: DetailsType?,
     selectLabel: (DetailsType) -> Unit
 ) {
+    val isCompact = LocalCompact.current
     Row(
         modifier = modifier.styleable(style = style then Style {
             background(colors.background)
-            contentPadding(vertical = dimensions.columnVerticalSpacing, horizontal = 0.dp)
+            contentPadding(vertical = AppTheme.dimensions.getColumnVerticalSpacing(isCompact), horizontal = 0.dp)
         }),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimensions.rowHorizontalSpacing)
     ) {

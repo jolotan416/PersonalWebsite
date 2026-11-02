@@ -43,11 +43,11 @@ object TextStyles {
     }
 
     val sectionHeaderText = Style {
-        textStyle(typography.titleLarge)
+        textStyle(typography.headlineSmall)
         contentColor(colors.primary)
     }
 
     val subSectionText = Style {
-        textStyle(typography.titleMedium)
+        textStyle(typography.titleLarge)
     }
 }

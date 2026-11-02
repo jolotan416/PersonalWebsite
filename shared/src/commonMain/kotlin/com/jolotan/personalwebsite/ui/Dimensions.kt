@@ -5,16 +5,24 @@ import androidx.compose.ui.unit.dp
 
 object Dimensions {
     // Container values
-    val mainContainerPadding: Dp = 32.dp
-    val internalContainerPadding: Dp = 20.dp
+    private val columnVerticalSpacing = 16.dp
+    private val desktopColumnVerticalSpacing = 32.dp
+    private val internalContainerPadding: Dp = 20.dp
+    private val desktopInternalContainerPadding: Dp = 60.dp
 
-    val columnVerticalSpacing = 16.dp
-    val columnSmallVerticalSpacing = 12.dp
+    val mainContainerPadding: Dp = 24.dp
+    val columnVerticalSmallSpacing = 12.dp
+
+    fun getInternalContainerPadding(isCompact: Boolean): Dp =
+        if (isCompact) internalContainerPadding else desktopInternalContainerPadding
+
+    fun getColumnVerticalSpacing(isCompact: Boolean): Dp =
+        if (isCompact) columnVerticalSpacing else desktopColumnVerticalSpacing
 
     val rowHorizontalSpacing = 24.dp
     val rowSmallHorizontalSpacing = 12.dp
 
-    val maxSectionWidth = 1200.dp
+    val maxSectionWidth = 1500.dp
 
     // Image values
     val imageWidth = 320.dp
