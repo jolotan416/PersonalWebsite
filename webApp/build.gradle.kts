@@ -24,6 +24,9 @@ kotlin {
 
             implementation(libs.compose.ui)
             implementation(libs.compose.foundation)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network)
         }
     }
 }

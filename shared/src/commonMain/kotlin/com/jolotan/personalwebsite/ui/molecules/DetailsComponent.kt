@@ -1,7 +1,6 @@
 package com.jolotan.personalwebsite.ui.molecules
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -24,6 +23,7 @@ import androidx.compose.material.icons.filled.Handshake
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.molecules.SectionIcon.Drawable
+import com.jolotan.personalwebsite.ui.styles.colors
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.DetailsType
 import com.jolotan.personalwebsite.ui.util.LocalCompact
@@ -39,13 +40,28 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import personalwebsite.shared.generated.resources.Res
 import personalwebsite.shared.generated.resources.beautymnl
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_0
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_1
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_2
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_3
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_4
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_5
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_6
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_7
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_8
+import personalwebsite.shared.generated.resources.beautymnl_screenshot_9
 import personalwebsite.shared.generated.resources.favicon
 import personalwebsite.shared.generated.resources.github
 import personalwebsite.shared.generated.resources.nokia
 import personalwebsite.shared.generated.resources.paradoxcat
 import personalwebsite.shared.generated.resources.spotlight
 import personalwebsite.shared.generated.resources.up_diliman
-import personalwebsite.shared.generated.resources.wais
+import personalwebsite.shared.generated.resources.wais_screenshot_accounts
+import personalwebsite.shared.generated.resources.wais_screenshot_budget
+import personalwebsite.shared.generated.resources.wais_screenshot_cashflow
+import personalwebsite.shared.generated.resources.wais_screenshot_dashboard
+import personalwebsite.shared.generated.resources.wais_screenshot_savings
+import personalwebsite.shared.generated.resources.wais_screenshot_transactions
 
 @Composable
 fun DetailsComponent(
@@ -477,20 +493,10 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
             )
         )
     ) {
-        val uriHandler = LocalUriHandler.current
-
         ProjectsDetailsSection(
-            modifier = Modifier.fillMaxWidth()
-                .clickable(onClick = {
-                    uriHandler.openUri("https://github.com/jolotan416/WaisPublic")
-                }),
+            modifier = Modifier.fillMaxWidth(),
             title = "Wais: Budget Tracker App",
-            description = """
-                Wais is a Kotlin Multiplatform app that simplifies financial organization, especially for (but not limited to) Filipinos. It supports multiple profiles, automatic exchange rates, savings goals, budget allocations, and cash flow tracking in one easy-to-use app.
-
-                It's offline-first, persisting user data and Ktor-fetched exchange rates with Room and DataStore, and ships to both the Google Play Store and Apple App Store with Firebase analytics and crash tracking.
-                """.trimIndent(),
-            image = Res.drawable.wais,
+            image = null,
             tags = listOf(
                 "Android",
                 "iOS",
@@ -506,14 +512,72 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "DataStore",
                 "Firebase Hosting and Analytics",
                 "AI-assisted"
+            ),
+            link = "https://github.com/jolotan416/WaisPublic"
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle(),
+                text = """
+                Wais is a Kotlin Multiplatform app that simplifies financial organization, especially for (but not limited to) Filipinos. It supports multiple profiles, automatic exchange rates, savings goals, budget allocations, and cash flow tracking in one easy-to-use app.
+
+                It's offline-first, persisting user data and Ktor-fetched exchange rates with Room and DataStore, and ships to both the Google Play Store and Apple App Store with Firebase analytics and crash tracking.
+                """.trimIndent()
             )
-        )
+            ImageRow(
+                modifier = Modifier.fillMaxWidth(),
+                images = listOf(
+                    Res.drawable.wais_screenshot_dashboard,
+                    Res.drawable.wais_screenshot_savings,
+                    Res.drawable.wais_screenshot_budget,
+                    Res.drawable.wais_screenshot_cashflow,
+                    Res.drawable.wais_screenshot_accounts,
+                    Res.drawable.wais_screenshot_transactions,
+                )
+            )
+        }
 
         ProjectsDetailsSection(
-            modifier = Modifier.fillMaxWidth()
-                .clickable(onClick = {
-                    uriHandler.openUri("https://github.com/jolotan416/PersonalWebsite")
-                }),
+            modifier = Modifier.fillMaxWidth(),
+            title = "BeautyMnl",
+            image = null,
+            tags = listOf(
+                "Android",
+                "XML (DataBinding)",
+                "MVVM",
+                "LiveData",
+                "Hilt",
+                "Retrofit",
+                "Coroutines",
+                "Room",
+                "SharedPreferences",
+                "RESTful API Design"
+            ),
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle(),
+                text = "BeautyMnl was the #1 homegrown e-commerce brand in the Philippines, and was where I began my career as an Android developer. I joined a two-person Android team during the app’s rebranding, and later became the sole developer responsible for building major new features. The app included a backend-driven homepage that could be reconfigured without an app update, product listing and browsing pages, customer reviews, a checkout workflow, and a loyalty rewards program."
+            )
+            ImageRow(
+                modifier = Modifier.fillMaxWidth(),
+                images = listOf(
+                    Res.drawable.beautymnl_screenshot_0,
+                    Res.drawable.beautymnl_screenshot_1,
+                    Res.drawable.beautymnl_screenshot_2,
+                    Res.drawable.beautymnl_screenshot_3,
+                    Res.drawable.beautymnl_screenshot_4,
+                    Res.drawable.beautymnl_screenshot_5,
+                    Res.drawable.beautymnl_screenshot_6,
+                    Res.drawable.beautymnl_screenshot_7,
+                    Res.drawable.beautymnl_screenshot_8,
+                    Res.drawable.beautymnl_screenshot_9,
+                )
+            )
+        }
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth(),
             title = "Personal Website",
             description = "The site you're browsing, built with Kotlin Multiplatform and deployed on Firebase Hosting.",
             image = Res.drawable.favicon,
@@ -522,14 +586,12 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "Compose",
                 "Styles API",
                 "Firebase Hosting",
-            )
+            ),
+            link = "https://github.com/jolotan416/PersonalWebsite"
         )
 
         ProjectsDetailsSection(
-            modifier = Modifier.fillMaxWidth()
-                .clickable(onClick = {
-                    uriHandler.openUri("https://github.com/jolotan416/UnraidAppProject")
-                }),
+            modifier = Modifier.fillMaxWidth(),
             title = "Unraid App Project",
             description = "My first Kotlin Multiplatform project, connecting to Unraid NAS servers through their GraphQL API.",
             image = Res.drawable.github,
@@ -543,14 +605,12 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "Room Database",
                 "Coroutines and Flows",
                 "Coil",
-            )
+            ),
+            link = "https://github.com/jolotan416/UnraidAppProject"
         )
 
         ProjectsDetailsSection(
-            modifier = Modifier.fillMaxWidth()
-                .clickable(onClick = {
-                    uriHandler.openUri("https://github.com/jolotan416/spotlight-app")
-                }),
+            modifier = Modifier.fillMaxWidth(),
             title = "Spotlight: To-do List App",
             description = "My first Android app built from scratch, designed to help users focus on one task at a time.",
             image = Res.drawable.spotlight,
@@ -564,7 +624,8 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "Coroutines and Flows",
                 "Hilt",
                 "WorkManager"
-            )
+            ),
+            link = "https://github.com/jolotan416/spotlight-app"
         )
     }
 }
@@ -576,8 +637,36 @@ fun ProjectsDetailsSection(
     title: String,
     description: String,
     image: DrawableResource?,
+    link: String? = null,
     tags: List<String>
 ) {
+    ProjectsDetailsSection(
+        modifier = modifier,
+        style = style,
+        title = title,
+        image = image,
+        tags = tags,
+        link = link
+    ) {
+        StyledText(
+            modifier = Modifier.fillMaxWidth(),
+            style = SectionTextStyle(),
+            text = description
+        )
+    }
+}
+
+@Composable
+fun ProjectsDetailsSection(
+    modifier: Modifier = Modifier,
+    style: Style = Style,
+    title: String,
+    image: DrawableResource?,
+    tags: List<String>,
+    link: String? = null,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    val uriHandler = LocalUriHandler.current
     DetailsSection(
         modifier = modifier.styleable(style = style),
         title = title
@@ -599,7 +688,20 @@ fun ProjectsDetailsSection(
                         contentDescription = null
                     )
                 }
-                ProjectDetails(description = description, tags = tags)
+                content()
+                TagsList(modifier = Modifier.fillMaxWidth(), tags = tags)
+                link.takeIf { !it.isNullOrBlank() }
+                    ?.let {
+                        TextButton(onClick = {
+                            uriHandler.openUri(it)
+                        }) {
+                            StyledText(
+                                modifier = Modifier.fillMaxWidth(),
+                                style = SectionTextStyle(),
+                                text = "Explore on Github >"
+                            )
+                        }
+                    }
             }
         } else {
             Row(
@@ -622,22 +724,25 @@ fun ProjectsDetailsSection(
                         )
                     )
                 ) {
-                    ProjectDetails(description = description, tags = tags)
+                    content()
+                    TagsList(modifier = Modifier.fillMaxWidth(), tags = tags)
+                    link.takeIf { !it.isNullOrBlank() }
+                        ?.let {
+                            TextButton(onClick = {
+                                uriHandler.openUri(it)
+                            }) {
+                                StyledText(
+                                    style = SectionTextStyle() then Style {
+                                        contentColor(colors.primary)
+                                    },
+                                    text = "Explore on Github >"
+                                )
+                            }
+                        }
                 }
             }
         }
     }
-}
-
-@Composable
-fun ProjectDetails(description: String, tags: List<String>) {
-    StyledText(
-        modifier = Modifier.fillMaxWidth(),
-        style = SectionTextStyle(),
-        text = description
-    )
-
-    TagsList(modifier = Modifier.fillMaxWidth(), tags = tags)
 }
 
 @Composable

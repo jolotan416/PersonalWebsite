@@ -12,14 +12,14 @@ enum class DetailsType(val icon: ImageVector, val buttonText: String, val title:
         buttonText = "Skills",
         title = "What can I do?"
     ),
+    Projects(
+        icon = Icons.Outlined.Code,
+        buttonText = "Projects",
+        title = "What have I built?"
+    ),
     Experience(
         icon = Icons.Default.WorkHistory,
         buttonText = "Experience",
         title = "What have I done?"
     ),
-    Projects(
-        icon = Icons.Outlined.Code,
-        buttonText = "Projects",
-        title = "What have I built?"
-    )
 }
