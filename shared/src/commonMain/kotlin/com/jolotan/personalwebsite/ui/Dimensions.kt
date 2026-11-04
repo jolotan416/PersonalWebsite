@@ -27,6 +27,7 @@ object Dimensions {
     // Image values
     val imageWidth = 320.dp
     val compactImageWidth = 120.dp
+    val imageHeight = 240.dp
 
     val imageElevation = 2.dp
 

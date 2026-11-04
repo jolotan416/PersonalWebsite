@@ -117,7 +117,8 @@ fun IntroductionComponentDetails(
         }
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSmallSpacing)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimensions.columnVerticalSmallSpacing),
+            horizontalAlignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
         ) {
             IntroductionComponentLocation(
                 modifier = locationModifier,

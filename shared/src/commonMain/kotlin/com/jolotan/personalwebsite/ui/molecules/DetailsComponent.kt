@@ -1,16 +1,21 @@
 package com.jolotan.personalwebsite.ui.molecules
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.styleable
@@ -20,6 +25,7 @@ import androidx.compose.material.icons.filled.Architecture
 import androidx.compose.material.icons.filled.Construction
 import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Handshake
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
@@ -27,9 +33,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import coil3.compose.AsyncImage
+import com.jolotan.personalwebsite.ui.atoms.CustomButton
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.molecules.SectionIcon.Drawable
 import com.jolotan.personalwebsite.ui.styles.colors
@@ -266,7 +276,7 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
                 )
                 TagsList(
                     modifier = Modifier.fillMaxWidth(), listOf(
-                        "Unidirectional Data Flow",
+                        "Unidirectional Data Flow Architecture",
                         "MVVM/MVI",
                         "Gradle modularization",
                         "Conventional plugins"
@@ -485,6 +495,8 @@ fun ExperienceDetailsSections(modifier: Modifier = Modifier, style: Style = Styl
 
 @Composable
 fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
+    val uriHandler = LocalUriHandler.current
+
     Column(
         modifier = modifier.styleable(style = style),
         verticalArrangement = Arrangement.spacedBy(
@@ -501,7 +513,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "Android",
                 "iOS",
                 "Kotlin Multiplatform",
-                "Compose",
+                "Jetpack Compose",
                 "Unidirectional Data Flow Architecture",
                 "MVVM",
                 "Styles API",
@@ -539,6 +551,61 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
 
         ProjectsDetailsSection(
             modifier = Modifier.fillMaxWidth(),
+            title = "BMW Panoramic iDrive Telematics Apps",
+            image = null,
+            tags = listOf(
+                "Android",
+                "Jetpack Compose",
+                "Unidirectional Data Flow Architecture",
+                "MVVM",
+                "Hilt",
+                "Retrofit",
+                "Room Database",
+                "Coroutines and Flows",
+                "DataStore",
+                "Coil"
+            ),
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle(),
+                text = """
+                At Paradox Cat, I refactored several BMW Telematics apps to support the technical and visual redesign for the BMW Neue Klasse, migrating their UIs to Jetpack Compose. I also restructured the codebase to be more flexible between ECU variants and backend connections.
+                """.trimIndent()
+            )
+            Box(
+                modifier = Modifier.fillMaxSize()
+                    .padding(
+                        horizontal = AppTheme.dimensions.getInternalContainerPadding(
+                            LocalCompact.current
+                        )
+                    )
+                    .clip(AppTheme.shapes.extraLarge)
+                    .clickable(onClick = { uriHandler.openUri("https://www.youtube.com/watch?v=2sbGe6ELVpo") }),
+                contentAlignment = Alignment.Center
+            ) {
+                AsyncImage(
+                    modifier = Modifier.fillMaxWidth()
+                        .aspectRatio(16f / 9f),
+                    model = "https://img.youtube.com/vi/2sbGe6ELVpo/maxresdefault.jpg",
+                    contentDescription = null
+                )
+                CustomButton(
+                    leftIcon = Icons.Default.PlayArrow,
+                    onButtonClick = { uriHandler.openUri("https://www.youtube.com/watch?v=2sbGe6ELVpo") })
+            }
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle() then Style {
+                    fontStyle(FontStyle.Italic)
+                    textAlign(TextAlign.Center)
+                },
+                text = "BMW’s “Developing the BMW Panoramic iDrive” video, about the platform I built Telematics apps for. My apps aren’t shown.".trimIndent()
+            )
+        }
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth(),
             title = "BeautyMnl",
             image = null,
             tags = listOf(
@@ -550,8 +617,8 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "Retrofit",
                 "Coroutines",
                 "Room",
-                "SharedPreferences",
-                "RESTful API Design"
+                "RESTful API Design",
+                "Glide"
             ),
         ) {
             StyledText(
@@ -574,6 +641,14 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                     Res.drawable.beautymnl_screenshot_9,
                 )
             )
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle() then Style {
+                    fontStyle(FontStyle.Italic)
+                    textAlign(TextAlign.Center)
+                },
+                text = "Screenshots from BeautyMnl's former Play Store listing".trimIndent()
+            )
         }
 
         ProjectsDetailsSection(
@@ -583,7 +658,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
             image = Res.drawable.favicon,
             tags = listOf(
                 "Kotlin Multiplatform",
-                "Compose",
+                "Jetpack Compose",
                 "Styles API",
                 "Firebase Hosting",
             ),
@@ -597,7 +672,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
             image = Res.drawable.github,
             tags = listOf(
                 "Kotlin Multiplatform",
-                "Compose",
+                "Jetpack Compose",
                 "Unidirectional Data Flow Architecture",
                 "MVVM",
                 "Koin",
@@ -616,7 +691,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
             image = Res.drawable.spotlight,
             tags = listOf(
                 "Android",
-                "Compose",
+                "Jetpack Compose",
                 "Fragments",
                 "MVVM with LiveData",
                 "Unidirectional Data Flow Architecture",

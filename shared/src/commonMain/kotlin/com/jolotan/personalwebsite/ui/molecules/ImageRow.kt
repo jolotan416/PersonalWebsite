@@ -53,7 +53,7 @@ fun ImageRow(modifier: Modifier = Modifier, style: Style = Style, images: List<D
                 modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(horizontal = AppTheme.dimensions.imageElevation),
                 state = pagerState,
-                pageSize = PageSize.Fixed(200.dp),
+                pageSize = PageSize.Fixed(AppTheme.dimensions.imageHeight),
                 pageSpacing = AppTheme.dimensions.rowHorizontalSpacing
             ) { page ->
                 Image(
