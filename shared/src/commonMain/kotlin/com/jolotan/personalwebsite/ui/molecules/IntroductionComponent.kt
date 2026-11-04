@@ -14,6 +14,7 @@ import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.styleable
 import androidx.compose.foundation.style.then
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Phone
@@ -26,6 +27,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
+import com.jolotan.personalwebsite.downloadFile
+import com.jolotan.personalwebsite.ui.atoms.CustomButton
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.LocalCompact
@@ -134,6 +137,11 @@ fun IntroductionComponentDetails(
             )
         }
         IntroductionComponentSocialMediaButtons(modifier = Modifier.fillMaxWidth())
+        CustomButton(
+            text = "Download Resume",
+            leftIcon = Icons.Default.Download,
+            onButtonClick = { downloadFile("/resume.pdf", "John-Louise-Tan-Resume.pdf") }
+        )
     }
 }
 

@@ -783,6 +783,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 "Unreal Engine",
                 "Blender",
             ),
+            link = "https://github.com/jolotan416/SuperMarioProject"
         ) {
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
@@ -794,7 +795,7 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
             VideoThumbnail(
                 modifier = Modifier.fillMaxWidth(),
                 videoUrl = "https://lnkd.in/p/ebhkCRnm",
-                thumbnailUrl = Res.getUri("drawable/super_mario.png")
+                thumbnailUrl = Res.getUri("drawable/super_mario.png"),
             )
         }
     }
