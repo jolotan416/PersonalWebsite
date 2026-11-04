@@ -1,21 +1,16 @@
 package com.jolotan.personalwebsite.ui.molecules
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.styleable
@@ -25,7 +20,7 @@ import androidx.compose.material.icons.filled.Architecture
 import androidx.compose.material.icons.filled.Construction
 import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Handshake
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.SportsEsports
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
@@ -33,14 +28,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
-import coil3.compose.AsyncImage
-import com.jolotan.personalwebsite.ui.atoms.CustomButton
 import com.jolotan.personalwebsite.ui.atoms.StyledText
+import com.jolotan.personalwebsite.ui.atoms.VideoThumbnail
 import com.jolotan.personalwebsite.ui.molecules.SectionIcon.Drawable
 import com.jolotan.personalwebsite.ui.styles.colors
 import com.jolotan.personalwebsite.ui.theme.AppTheme
@@ -369,6 +362,50 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
             }
         }
 
+        DetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Hobbies and Interests",
+            sectionIcon = SectionIcon.Vector(Icons.Default.SportsEsports)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(
+                    AppTheme.dimensions.getColumnVerticalSpacing(true)
+                ),
+                horizontalAlignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
+            ) {
+                StyledText(
+                    modifier = Modifier.fillMaxWidth(),
+                    style = SubSectionTitleStyle(),
+                    text = """
+                    Creative Tech:
+                """.trimIndent()
+                )
+                TagsList(
+                    modifier = Modifier.fillMaxWidth(), listOf(
+                        "Video game development",
+                        "Unreal Engine",
+                        "3D Printing",
+                        "Blender",
+                        "Embedded Electronics"
+                    )
+                )
+                StyledText(
+                    modifier = Modifier.fillMaxWidth(),
+                    style = SubSectionTitleStyle(),
+                    text = """
+                    Content Creation:
+                """.trimIndent()
+                )
+                TagsList(
+                    modifier = Modifier.fillMaxWidth(), listOf(
+                        "Video Editing",
+                        "Song Writing",
+                        "Music Production",
+                    )
+                )
+            }
+        }
+
         if (!LocalCompact.current) {
             Spacer(modifier = Modifier.height(AppTheme.dimensions.getColumnVerticalSpacing(false)))
         }
@@ -573,27 +610,11 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 At Paradox Cat, I refactored several BMW Telematics apps to support the technical and visual redesign for the BMW Neue Klasse, migrating their UIs to Jetpack Compose. I also restructured the codebase to be more flexible between ECU variants and backend connections.
                 """.trimIndent()
             )
-            Box(
-                modifier = Modifier.fillMaxSize()
-                    .padding(
-                        horizontal = AppTheme.dimensions.getInternalContainerPadding(
-                            LocalCompact.current
-                        )
-                    )
-                    .clip(AppTheme.shapes.extraLarge)
-                    .clickable(onClick = { uriHandler.openUri("https://www.youtube.com/watch?v=2sbGe6ELVpo") }),
-                contentAlignment = Alignment.Center
-            ) {
-                AsyncImage(
-                    modifier = Modifier.fillMaxWidth()
-                        .aspectRatio(16f / 9f),
-                    model = "https://img.youtube.com/vi/2sbGe6ELVpo/maxresdefault.jpg",
-                    contentDescription = null
-                )
-                CustomButton(
-                    leftIcon = Icons.Default.PlayArrow,
-                    onButtonClick = { uriHandler.openUri("https://www.youtube.com/watch?v=2sbGe6ELVpo") })
-            }
+            VideoThumbnail(
+                modifier = Modifier.fillMaxWidth(),
+                videoUrl = "https://www.youtube.com/watch?v=2sbGe6ELVpo",
+                thumbnailUrl = "https://img.youtube.com/vi/2sbGe6ELVpo/maxresdefault.jpg"
+            )
             StyledText(
                 modifier = Modifier.fillMaxWidth(),
                 style = SectionTextStyle() then Style {
@@ -702,6 +723,80 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
             ),
             link = "https://github.com/jolotan416/spotlight-app"
         )
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "DIY R2-D2 Toy",
+            image = null,
+            tags = listOf(
+                "3D Printing",
+                "Blender",
+                "Embedded Electronics",
+                "Video Editing"
+            ),
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle(),
+                text = """
+                A fully 3D-printed replica of R2-D2 with onboard electronics that let it drive and swivel its head.
+                """.trimIndent()
+            )
+            VideoThumbnail(
+                modifier = Modifier.fillMaxWidth(),
+                videoUrl = "https://www.youtube.com/shorts/sBTFN4D_nsA",
+                thumbnailUrl = "https://img.youtube.com/vi/sBTFN4D_nsA/maxresdefault.jpg"
+            )
+        }
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Fully 3D-Printed Keyboard",
+            image = null,
+            tags = listOf(
+                "3D Printing",
+                "Blender",
+                "Embedded Electronics",
+                "Video Editing"
+            ),
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle(),
+                text = """
+                A 3D-printed, split ergonomic Dactyl Manuform keyboard, designed with the Cosmos Keyboard Generator by ryanis.cool. I soldered the electronics, flashed it with QMK firmware, and modeled the DSA-profile keycaps in Blender and printed them myself.
+                """.trimIndent()
+            )
+            VideoThumbnail(
+                modifier = Modifier.fillMaxWidth(),
+                videoUrl = "https://www.youtube.com/shorts/_41k2Q-ncTg",
+                thumbnailUrl = "https://img.youtube.com/vi/_41k2Q-ncTg/maxresdefault.jpg"
+            )
+        }
+
+        ProjectsDetailsSection(
+            modifier = Modifier.fillMaxWidth(),
+            title = "Super Mario 3D",
+            image = null,
+            tags = listOf(
+                "Video game development",
+                "Unreal Engine",
+                "Blender",
+            ),
+        ) {
+            StyledText(
+                modifier = Modifier.fillMaxWidth(),
+                style = SectionTextStyle(),
+                text = """
+                A study project for learning Unreal Engine, recreating Super Mario-style mechanics in a 3D environment. I built the landscape and gameplay programming in Unreal Engine and modeled the Goomba in Blender.
+                """.trimIndent()
+            )
+            VideoThumbnail(
+                modifier = Modifier.fillMaxWidth(),
+                videoUrl = "https://lnkd.in/p/ebhkCRnm",
+                thumbnailUrl = Res.getUri("drawable/super_mario.png")
+            )
+        }
     }
 }
 
@@ -772,7 +867,9 @@ fun ProjectsDetailsSection(
                         }) {
                             StyledText(
                                 modifier = Modifier.fillMaxWidth(),
-                                style = SectionTextStyle(),
+                                style = SectionTextStyle() then Style {
+                                    contentColor(colors.primary)
+                                },
                                 text = "Explore on Github >"
                             )
                         }

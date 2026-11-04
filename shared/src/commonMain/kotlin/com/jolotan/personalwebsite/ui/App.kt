@@ -103,6 +103,8 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
                                 
                                 Before entering the automotive industry, I spent nearly three years building and leading features for BeautyMnl, one of the Philippines' homegrown e-commerce platforms. My engineering foundation was built at Nokia, where I wrote 5G network simulators using C++ and grew into a technical lead role.
                                 
+                                Outside of work, I tinker with 3D printing, embedded electronics, and game development with Unreal Engine and Blender.
+                                
                                 Across every role, from telecom to e-commerce to automotive, my philosophy has been the same. It's to always leave the places I've worked in better than I found them.
                             """.trimIndent()
                             )
