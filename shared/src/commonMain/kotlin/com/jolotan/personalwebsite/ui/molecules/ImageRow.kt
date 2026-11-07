@@ -2,6 +2,9 @@ package com.jolotan.personalwebsite.ui.molecules
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.snapping.SnapPosition
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -25,6 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.unit.max
+import com.jolotan.personalwebsite.ui.atoms.PagerIndicator
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.LocalCompact
 import kotlinx.coroutines.launch
@@ -37,7 +42,12 @@ fun ImageRow(modifier: Modifier = Modifier, style: Style = Style, images: List<D
     val pagerState = rememberPagerState(pageCount = { images.size })
     var selectedImageIndex by remember { mutableStateOf(-1) }
 
-    Column(modifier = modifier.styleable(style = style)) {
+    Column(
+        modifier = modifier.styleable(style = style),
+        verticalArrangement = Arrangement.spacedBy(
+            AppTheme.dimensions.getColumnVerticalSpacing(LocalCompact.current)
+        )
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -55,22 +65,33 @@ fun ImageRow(modifier: Modifier = Modifier, style: Style = Style, images: List<D
                 }
             }
 
-            HorizontalPager(
-                modifier = Modifier.weight(1f),
-                contentPadding = PaddingValues(horizontal = AppTheme.dimensions.imageElevation),
-                state = pagerState,
-                pageSize = PageSize.Fixed(AppTheme.dimensions.imageHeight),
-                pageSpacing = AppTheme.dimensions.rowHorizontalSpacing
-            ) { page ->
-                Image(
-                    modifier = Modifier.fillMaxWidth()
-                        .shadow(
-                            elevation = AppTheme.dimensions.imageElevation,
-                            shape = AppTheme.shapes.extraLarge
-                        ).clickable(onClick = { selectedImageIndex = page }),
-                    painter = painterResource(images[page]),
-                    contentDescription = null
-                )
+            BoxWithConstraints(modifier = Modifier.weight(1f)) {
+                val pageWidth = AppTheme.dimensions.imageHeight
+                val minPadding = AppTheme.dimensions.imageElevation
+                val horizontalPadding = if (LocalCompact.current) {
+                    max((maxWidth - pageWidth) / 2, minPadding)
+                } else {
+                    minPadding
+                }
+
+                HorizontalPager(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(horizontal = horizontalPadding),
+                    state = pagerState,
+                    pageSize = PageSize.Fixed(pageWidth),
+                    pageSpacing = AppTheme.dimensions.rowHorizontalSpacing,
+                    snapPosition = if (LocalCompact.current) SnapPosition.Center else SnapPosition.Start
+                ) { page ->
+                    Image(
+                        modifier = Modifier.fillMaxWidth()
+                            .shadow(
+                                elevation = AppTheme.dimensions.imageElevation,
+                                shape = AppTheme.shapes.extraLarge
+                            ).clickable(onClick = { selectedImageIndex = page }),
+                        painter = painterResource(images[page]),
+                        contentDescription = null
+                    )
+                }
             }
 
             if (!LocalCompact.current) {
@@ -86,6 +107,10 @@ fun ImageRow(modifier: Modifier = Modifier, style: Style = Style, images: List<D
                     )
                 }
             }
+        }
+
+        if (LocalCompact.current) {
+            PagerIndicator(modifier = Modifier.fillMaxWidth(), pagerState = pagerState)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.jolotan.personalwebsite.ui.molecules
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -249,7 +250,12 @@ fun IntroductionComponentImage(modifier: Modifier = Modifier, style: Style = Sty
     Image(
         modifier = modifier.aspectRatio(1f)
             .clip(shape = CircleShape)
-            .styleable(style = style),
+            .styleable(style = style)
+            .border(
+                width = AppTheme.dimensions.imageBorder,
+                color = AppTheme.colors.primary,
+                shape = CircleShape
+            ),
         painter = painterResource(Res.drawable.site_headshot),
         contentDescription = null
     )

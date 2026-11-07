@@ -28,11 +28,13 @@ object Dimensions {
     val imageWidth = 320.dp
     val compactImageWidth = 120.dp
     val imageHeight = 240.dp
+    val imageBorder = 4.dp
 
     val imageElevation = 2.dp
 
     val largeIconSize = 56.dp
     val iconSize = 28.dp
+    val smallIconSize = 12.dp
 
     // Button values
     val buttonContainerHorizontalPadding: Dp = 20.dp
