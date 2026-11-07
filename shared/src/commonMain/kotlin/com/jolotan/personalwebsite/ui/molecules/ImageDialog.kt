@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -21,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.window.Dialog
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.theme.AppTheme
@@ -53,25 +56,16 @@ fun ImageDialog(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(
-                    colors = IconButtonColors(
-                        containerColor = AppTheme.colors.surface.copy(alpha = ICON_BUTTON_ALPHA),
-                        contentColor = AppTheme.colors.onSurface.copy(alpha = ICON_BUTTON_ALPHA),
-                        disabledContainerColor = AppTheme.colors.surfaceVariant.copy(alpha = ICON_BUTTON_ALPHA),
-                        disabledContentColor = AppTheme.colors.onSurfaceVariant.copy(alpha = ICON_BUTTON_ALPHA)
-                    ),
+                ImageDialogNavigationButton(
+                    modifier = Modifier.width(AppTheme.dimensions.iconButtonSize),
+                    icon = Icons.Default.ArrowBackIosNew,
                     enabled = selectedImageIndex > 0,
                     onClick = {
                         if (selectedImageIndex > 0) {
                             --selectedImageIndex
                         }
-                    }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBackIosNew,
-                        contentDescription = null,
-                        tint = AppTheme.colors.onSurface
-                    )
-                }
+                    }
+                )
 
                 if (!LocalCompact.current) {
                     ImageDialogColumn(
@@ -81,27 +75,47 @@ fun ImageDialog(
                     )
                 }
 
-                IconButton(
-                    colors = IconButtonColors(
-                        containerColor = AppTheme.colors.surface.copy(alpha = ICON_BUTTON_ALPHA),
-                        contentColor = AppTheme.colors.onSurface.copy(alpha = ICON_BUTTON_ALPHA),
-                        disabledContainerColor = AppTheme.colors.surfaceVariant.copy(alpha = ICON_BUTTON_ALPHA),
-                        disabledContentColor = AppTheme.colors.onSurfaceVariant.copy(alpha = ICON_BUTTON_ALPHA)
-                    ),
+                ImageDialogNavigationButton(
+                    modifier = Modifier.width(AppTheme.dimensions.iconButtonSize),
+                    icon = Icons.AutoMirrored.Default.ArrowForwardIos,
                     enabled = selectedImageIndex < images.lastIndex,
                     onClick = {
                         if (selectedImageIndex < images.lastIndex) {
                             ++selectedImageIndex
                         }
-                    }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Default.ArrowForwardIos,
-                        contentDescription = null,
-                        tint = AppTheme.colors.onSurface
-                    )
-                }
+                    }
+                )
             }
         }
+    }
+}
+
+@Composable
+fun ImageDialogNavigationButton(
+    modifier: Modifier = Modifier,
+    icon: ImageVector,
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    if (enabled) {
+        IconButton(
+            modifier = modifier,
+            colors = IconButtonColors(
+                containerColor = AppTheme.colors.surface.copy(alpha = ICON_BUTTON_ALPHA),
+                contentColor = AppTheme.colors.onSurface.copy(alpha = ICON_BUTTON_ALPHA),
+                disabledContainerColor = AppTheme.colors.surfaceVariant.copy(alpha = ICON_BUTTON_ALPHA),
+                disabledContentColor = AppTheme.colors.onSurfaceVariant.copy(alpha = ICON_BUTTON_ALPHA)
+            ),
+            onClick = onClick
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = AppTheme.colors.onSurface
+            )
+        }
+    } else {
+        Spacer(modifier = modifier)
     }
 }
 

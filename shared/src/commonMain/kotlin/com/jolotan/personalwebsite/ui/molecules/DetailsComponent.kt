@@ -652,13 +652,10 @@ fun ProjectsDetailsSections(modifier: Modifier = Modifier, style: Style = Style)
                 images = listOf(
                     Res.drawable.beautymnl_screenshot_0,
                     Res.drawable.beautymnl_screenshot_1,
-                    Res.drawable.beautymnl_screenshot_2,
                     Res.drawable.beautymnl_screenshot_3,
-                    Res.drawable.beautymnl_screenshot_4,
                     Res.drawable.beautymnl_screenshot_5,
                     Res.drawable.beautymnl_screenshot_6,
                     Res.drawable.beautymnl_screenshot_7,
-                    Res.drawable.beautymnl_screenshot_8,
                     Res.drawable.beautymnl_screenshot_9,
                 )
             )

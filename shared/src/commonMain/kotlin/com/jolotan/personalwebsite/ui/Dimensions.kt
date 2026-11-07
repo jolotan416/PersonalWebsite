@@ -43,4 +43,5 @@ object Dimensions {
     val buttonElevationSpread: Dp = 0.dp
     val buttonElevationXOffset: Dp = 0.dp
     val buttonElevationYOffset: Dp = 2.dp
+    val iconButtonSize: Dp = 40.dp
 }
