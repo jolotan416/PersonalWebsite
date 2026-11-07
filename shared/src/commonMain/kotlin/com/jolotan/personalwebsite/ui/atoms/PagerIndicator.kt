@@ -22,7 +22,10 @@ fun PagerIndicator(modifier: Modifier = Modifier, pagerState: PagerState) {
 
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalArrangement = Arrangement.spacedBy(
+            space = AppTheme.dimensions.rowHorizontalSpacing,
+            alignment = Alignment.CenterHorizontally
+        ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(pageCount) { page ->
