@@ -22,6 +22,8 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,10 +31,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import com.jolotan.personalwebsite.downloadFile
+import com.jolotan.personalwebsite.fetchCountryCode
 import com.jolotan.personalwebsite.ui.atoms.CustomButton
 import com.jolotan.personalwebsite.ui.atoms.StyledText
 import com.jolotan.personalwebsite.ui.theme.AppTheme
 import com.jolotan.personalwebsite.ui.util.LocalCompact
+import com.jolotan.personalwebsite.ui.util.resumeFor
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import personalwebsite.shared.generated.resources.Res
@@ -93,6 +97,7 @@ fun IntroductionComponentDetails(
         ),
         horizontalAlignment = if (LocalCompact.current) Alignment.CenterHorizontally else Alignment.Start
     ) {
+        val countryCode by produceState<String?>(initialValue = null) { value = fetchCountryCode() }
         val locationModifier = if (LocalCompact.current) {
             Modifier
         } else {
@@ -141,7 +146,7 @@ fun IntroductionComponentDetails(
         CustomButton(
             text = "Download Resume",
             leftIcon = Icons.Default.Download,
-            onButtonClick = { downloadFile("/resume.pdf", "John-Louise-Tan-Resume.pdf") }
+            onButtonClick = { resumeFor(countryCode).let { downloadFile(it.path, it.fileName) } }
         )
     }
 }
