@@ -202,6 +202,12 @@ fun SkillsDetailsSections(modifier: Modifier = Modifier, style: Style = Style) {
                 """.trimIndent()
                     )
                 }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .height(IntrinsicSize.Max),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.dimensions.rowHorizontalSpacing)
+            ) {
                 DetailsSection(
                     modifier = Modifier.weight(1f)
                         .fillMaxHeight(),
