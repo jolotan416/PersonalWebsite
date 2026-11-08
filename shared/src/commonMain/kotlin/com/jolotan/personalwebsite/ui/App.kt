@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.foundation.style.styleable
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -58,100 +59,102 @@ fun App(windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowS
         var selectedDetailsType: DetailsType? by remember { mutableStateOf(null) }
 
         CompositionLocalProvider(LocalCompact provides isCompact) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-                    .styleable(style = AppTheme.styles.container.main),
-                state = scrollState,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = AppTheme.dimensions.getColumnVerticalSpacing(isCompact),
-                    alignment = Alignment.CenterVertically
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                contentPadding = PaddingValues(AppTheme.dimensions.mainContainerPadding)
-            ) {
-                item(key = "introduction") {
-                    TimedAnimatedVisibility(
-                        modifier = widthModifier,
-                        key = Unit,
-                        duration = VISIBILITY_ANIMATION_DURATION,
-                        isVisible = isAnimatedVisibilityFinished,
-                        updateVisibility = { isAnimatedVisibilityFinished = it }
-                    ) {
-                        IntroductionComponent(
-                            modifier = Modifier.fillMaxWidth(),
-                            style = AppTheme.styles.container.getStyleSection(isCompact)
-                        )
-                    }
-                }
-
-                item(key = "bio") {
-                    TimedAnimatedVisibility(
-                        modifier = widthModifier,
-                        key = Unit,
-                        duration = VISIBILITY_ANIMATION_DURATION,
-                        isVisible = isAnimatedVisibilityFinished,
-                        updateVisibility = { isAnimatedVisibilityFinished = it }
-                    ) {
-                        DetailsSection(modifier = Modifier.fillMaxWidth(), title = "About me") {
-                            StyledText(
+            SelectionContainer {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                        .styleable(style = AppTheme.styles.container.main),
+                    state = scrollState,
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = AppTheme.dimensions.getColumnVerticalSpacing(isCompact),
+                        alignment = Alignment.CenterVertically
+                    ),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    contentPadding = PaddingValues(AppTheme.dimensions.mainContainerPadding)
+                ) {
+                    item(key = "introduction") {
+                        TimedAnimatedVisibility(
+                            modifier = widthModifier,
+                            key = Unit,
+                            duration = VISIBILITY_ANIMATION_DURATION,
+                            isVisible = isAnimatedVisibilityFinished,
+                            updateVisibility = { isAnimatedVisibilityFinished = it }
+                        ) {
+                            IntroductionComponent(
                                 modifier = Modifier.fillMaxWidth(),
-                                style = SectionTextStyle(),
-                                text = """
-                                I'm a mobile developer specializing in Android development and Kotlin Multiplatform. I care about improving user experiences through clean architecture, well-tested code, and polished user interfaces. I love tinkering with new ideas and concepts for building products both inside and outside of the codebase.
-                                
-                                Today, I'm working as a Senior Android Developer at Paradox Cat GmbH in Germany, where I've contributed to multiple projects and use cases spanning various in-car experiences like real-time car signals, call handling, video playback, and backend communication over MQTT and REST.
-                                
-                                Before entering the automotive industry, I spent nearly three years building and leading features for BeautyMnl, one of the Philippines' homegrown e-commerce platforms. My engineering foundation was built at Nokia, where I wrote 5G network simulators using C++ and grew into a technical lead role.
-                                
-                                Outside of work, I tinker with 3D printing, embedded electronics, and game development with Unreal Engine and Blender.
-                                
-                                Across every role, from telecom to e-commerce to automotive, my philosophy has been the same. It's to always leave the places I've worked in better than I found them.
-                            """.trimIndent()
+                                style = AppTheme.styles.container.getStyleSection(isCompact)
                             )
                         }
                     }
-                }
 
-                stickyHeader(key = DetailsType.entries) {
-                    TimedAnimatedVisibility(
-                        modifier = widthModifier,
-                        key = Unit,
-                        duration = VISIBILITY_ANIMATION_DURATION,
-                        isVisible = isAnimatedVisibilityFinished,
-                        updateVisibility = { isAnimatedVisibilityFinished = it }
-                    ) {
-                        DetailsSelectorComponent(
+                    item(key = "bio") {
+                        TimedAnimatedVisibility(
                             modifier = widthModifier,
-                            selectedDetailsType = selectedDetailsType,
-                            selectLabel = {
-                                selectedDetailsType = if (selectedDetailsType != it) {
-                                    it
-                                } else {
-                                    null
-                                }
+                            key = Unit,
+                            duration = VISIBILITY_ANIMATION_DURATION,
+                            isVisible = isAnimatedVisibilityFinished,
+                            updateVisibility = { isAnimatedVisibilityFinished = it }
+                        ) {
+                            DetailsSection(modifier = Modifier.fillMaxWidth(), title = "About me") {
+                                StyledText(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    style = SectionTextStyle(),
+                                    text = """
+                                    I'm a mobile developer specializing in Android development and Kotlin Multiplatform. I care about improving user experiences through clean architecture, well-tested code, and polished user interfaces. I love tinkering with new ideas and concepts for building products both inside and outside of the codebase.
+                                
+                                    Today, I'm working as a Senior Android Developer at Paradox Cat GmbH in Germany, where I've contributed to multiple projects and use cases spanning various in-car experiences like real-time car signals, call handling, video playback, and backend communication over MQTT and REST.
+                                
+                                    Before entering the automotive industry, I spent nearly three years building and leading features for BeautyMnl, one of the Philippines' homegrown e-commerce platforms. My engineering foundation was built at Nokia, where I wrote 5G network simulators using C++ and grew into a technical lead role.
+                                
+                                    Outside of work, I tinker with 3D printing, embedded electronics, and game development with Unreal Engine and Blender.
+                                
+                                    Across every role, from telecom to e-commerce to automotive, my philosophy has been the same. It's to always leave the places I've worked in better than I found them.
+                                """.trimIndent()
+                                )
                             }
-                        )
-                    }
-                }
-
-                item(key = "details") {
-                    AnimatedContent(
-                        modifier = widthModifier,
-                        targetState = selectedDetailsType,
-                        transitionSpec = {
-                            fadeIn(tween(durationMillis = VISIBILITY_ANIMATION_DURATION.inWholeMilliseconds.toInt())) togetherWith
-                                    fadeOut(tween(durationMillis = VISIBILITY_ANIMATION_DURATION.inWholeMilliseconds.toInt())) using
-                                    SizeTransform(clip = false)
                         }
-                    ) { detailsType ->
-                        DetailsComponent(
-                            modifier = Modifier.fillMaxWidth(),
-                            detailsType = detailsType
-                        )
+                    }
 
-                        LaunchedEffect(transition.currentState, transition.targetState) {
-                            if (transition.currentState == transition.targetState && !transition.isRunning && detailsType != null) {
-                                scrollState.animateScrollToItem(2)
+                    stickyHeader(key = DetailsType.entries) {
+                        TimedAnimatedVisibility(
+                            modifier = widthModifier,
+                            key = Unit,
+                            duration = VISIBILITY_ANIMATION_DURATION,
+                            isVisible = isAnimatedVisibilityFinished,
+                            updateVisibility = { isAnimatedVisibilityFinished = it }
+                        ) {
+                            DetailsSelectorComponent(
+                                modifier = widthModifier,
+                                selectedDetailsType = selectedDetailsType,
+                                selectLabel = {
+                                    selectedDetailsType = if (selectedDetailsType != it) {
+                                        it
+                                    } else {
+                                        null
+                                    }
+                                }
+                            )
+                        }
+                    }
+
+                    item(key = "details") {
+                        AnimatedContent(
+                            modifier = widthModifier,
+                            targetState = selectedDetailsType,
+                            transitionSpec = {
+                                fadeIn(tween(durationMillis = VISIBILITY_ANIMATION_DURATION.inWholeMilliseconds.toInt())) togetherWith
+                                        fadeOut(tween(durationMillis = VISIBILITY_ANIMATION_DURATION.inWholeMilliseconds.toInt())) using
+                                        SizeTransform(clip = false)
+                            }
+                        ) { detailsType ->
+                            DetailsComponent(
+                                modifier = Modifier.fillMaxWidth(),
+                                detailsType = detailsType
+                            )
+
+                            LaunchedEffect(transition.currentState, transition.targetState) {
+                                if (transition.currentState == transition.targetState && !transition.isRunning && detailsType != null) {
+                                    scrollState.animateScrollToItem(2)
+                                }
                             }
                         }
                     }

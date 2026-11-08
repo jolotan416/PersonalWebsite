@@ -45,13 +45,10 @@ import personalwebsite.shared.generated.resources.Res
 import personalwebsite.shared.generated.resources.beautymnl
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_0
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_1
-import personalwebsite.shared.generated.resources.beautymnl_screenshot_2
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_3
-import personalwebsite.shared.generated.resources.beautymnl_screenshot_4
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_5
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_6
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_7
-import personalwebsite.shared.generated.resources.beautymnl_screenshot_8
 import personalwebsite.shared.generated.resources.beautymnl_screenshot_9
 import personalwebsite.shared.generated.resources.favicon
 import personalwebsite.shared.generated.resources.github
@@ -936,6 +933,7 @@ fun TagsList(modifier: Modifier = Modifier, tags: List<String>) {
         tags.forEach { tag ->
             FilterChip(
                 selected = false,
+                enabled = false,
                 onClick = {},
                 label = {
                     StyledText(style = AppTheme.styles.text.helperText, text = tag)

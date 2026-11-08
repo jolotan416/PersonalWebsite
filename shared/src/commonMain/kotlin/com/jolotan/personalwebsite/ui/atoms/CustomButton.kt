@@ -8,6 +8,7 @@ import androidx.compose.foundation.style.Style
 import androidx.compose.foundation.style.rememberUpdatedStyleState
 import androidx.compose.foundation.style.styleable
 import androidx.compose.foundation.style.then
+import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -58,11 +59,13 @@ fun CustomButton(
             )
         }
         text?.let {
-            StyledText(
-                text = it,
-                style = style.content then textStyle,
-                styleState = styleState
-            )
+            DisableSelection {
+                StyledText(
+                    text = it,
+                    style = style.content then textStyle,
+                    styleState = styleState
+                )
+            }
         }
     }
 }

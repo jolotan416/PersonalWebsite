@@ -1,6 +1,7 @@
 package com.jolotan.personalwebsite.ui.molecules
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -153,7 +154,9 @@ fun ImageDialogColumn(
             contentDescription = null
         )
         TextButton(onClick = onDismiss) {
-            StyledText(style = AppTheme.styles.text.bodyText, text = "Close")
+            DisableSelection {
+                StyledText(style = AppTheme.styles.text.bodyText, text = "Close")
+            }
         }
     }
 }
